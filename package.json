@@ -1,0 +1,34 @@
+{
+  "name": "jspinch",
+  "version": "0.0.1",
+  "author": "Clay Smith @smithclay",
+  "description": "a wrapper for analyzing large projects with jshint",
+  "bin": {
+    "http-server": "./bin/http-server"
+  },
+  "scripts": {
+    "start": "node ./bin/http-server",
+    "test": "vows --spec --isolate"
+  },
+  "main": "./lib/http-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smithclay/jspinch.git"
+  },
+  "keywords": [
+    "jshint",
+    "static analysis"
+	],
+  "dependencies" : {
+    "jshint"   :  "*",
+	"colors" : "*",
+	"commander" : ">=0.5.0"
+  },
+  "devDependencies": {
+    "vows"    :  "0.5.x"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.6"
+  }
+}
