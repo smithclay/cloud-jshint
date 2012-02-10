@@ -23,6 +23,7 @@
     "jshint"   :  "*",
 	"colors" : "*",
 	"glob": "*",
+	"cli-table": "*",
 	"commander" : ">=0.5.0"
   },
   "devDependencies": {
