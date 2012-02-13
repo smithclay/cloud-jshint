@@ -1,17 +1,18 @@
 # jspinch
-Write better javascript with jspinch. jspinch is a [JSHint](https://github.com/jshint/jshint/) wrapper that lets developers track JavaScript code quality of projects by measuring the number of JSHint errors.
+Write better javascript with jspinch. jspinch is a simple [JSHint](https://github.com/jshint/jshint/) and [JSLint](http://www.jslint.com) wrapper that lets developers track the JavaScript code quality of projects.
 ## Motivation
-*JSHint should love all your code.*
+*JavaScript linters should love all your code.*
 
-JavaScript projects start small. As they grow, it becomes important to enforce good style and convention with a linting tool like JSHint or JSLint. jspinch builds on top of JSHint to collect simple metrics about all the JavaScript in your project. 
+JavaScript projects start small. As they grow, it becomes important to enforce good style and convention. jspinch uses JSHint or JSLint to create reports detailing errors in JavaScript files.
 
-It empowers developers to answer the question, "How much does JSHint like my code?"
+It empowers developers to answer the question, "How much does JSHint (or JSLint) love my code?"
 
-jspinch provides an extensible reporter interface. It wants to be part of a continuious integration server to track code quality over time.
+jspinch provides an extensible reporter interface. It wants to be part of a continuious integration server or your build process.
 ## Installation
 TBD
 ## Usage
-There are two ways to run jspinch. You can run it from the command line, or use it directly in node.js.
+You can run jspinch directly from the command line.
 ### CLI
-### Programatically
+
+## Extending jspinch
 ### Writing your own reporters
