@@ -15,14 +15,19 @@ TBD, but you can eventaully use npm.
 You can run jspinch directly from the command line or extend it programmatically in your node scripts.
 ### CLI
 To run against all *.js files, _recursively_, in the current directory:
+
 ``` sh
   $ jspinch
 ```
+
 To run against all *.js files, _recursively_, in the ./lib directory, skipping the node_modules directory and using [JSLint](http://www.jslint.com) parsing:
+
 ``` sh
   $ jspinch -d lib -x node_modules -p jslint
 ```
+
 For a full list of options:
+
 ``` sh
   $ jspinch -h
 ```
