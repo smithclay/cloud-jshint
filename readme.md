@@ -1,4 +1,5 @@
 # jspinch
+[![Build Status](https://secure.travis-ci.org/smithclay/jspinch.png)](http://travis-ci.org/smithclay/jspinch])
 Write better javascript with jspinch. jspinch is a simple [JSHint](https://github.com/jshint/jshint/) and [JSLint](http://www.jslint.com) wrapper that lets developers track the JavaScript code quality of projects.
 ## Motivation
 *JavaScript linters should love all your code.*
