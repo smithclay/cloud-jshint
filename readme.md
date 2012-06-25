@@ -33,6 +33,8 @@ For a full list of options:
 ``` sh
   $ jspinch -h
 ```
+### Travis CI Integration
+TBD. Modify your after_script in travis.yml and execute jspinch. If there are errors it should cause a build failed.
 ## Extending jspinch
 ### Writing your own reporters
 Want to do something fancy with the lint error reports? You can write your own report generator for jspinch.
