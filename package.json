@@ -1,16 +1,12 @@
 {
   "name": "jspinch",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Clay Smith @smithclay",
-  "description": "a tool for tracking code quality with jshint and jslint",
-  "bin": {
-    "jspinch": "./bin/jspinch"
-  },
+  "description": "a web service for jshint error reporting",
   "scripts": {
-    "start": "node ./bin/jspinch",
     "test": "vows --spec --isolate"
   },
-  "main": "./lib/cli",
+  "main": "./server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/smithclay/jspinch.git"
@@ -22,13 +18,8 @@
     "static analysis"
 	],
   "dependencies" : {
-    "jshint"   :  "*",
-	"jslint" : "*",
-	"colors" : "*",
-	"glob": "*",
-    "minimatch" : "*",
-	"cli-table": "*",
-	"commander" : ">=0.5.0"
+    "jshint"   :  "~0.7.1",
+    "express": "~2.5.10"
   },
   "devDependencies": {
     "vows"    :  "0.5.x"
