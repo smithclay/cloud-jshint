@@ -2,6 +2,7 @@ var express = require('express'),
     util = require('util'),
     fs = require('fs'),
     format = util.format,
+    path = require('path'),
     jshint = require('jshint').JSHINT;
     
 var app = express.createServer();
@@ -12,8 +13,20 @@ app.get('/', function(req, res){
 });
 
 app.post('/file', function(req, res) {
-    var options = req.body.options || {};    
-    // Parse options object.
+    var options = req.body.options || {};
+    
+    // Request must have a posted file.
+    if (!req.files || !req.files.file) {
+        return res.send('No file specified in request\n', 400);
+    }
+    
+    // The file must be a javascript file.
+    var file = req.files.file;    
+    if (".js" !== path.extname(file.name)) {
+        return res.send('File extension must be .js\n', 400);
+    }
+    
+    // Parse optional options object.
     if (typeof options === "string") {
         try {
             options = JSON.parse(options);
@@ -22,16 +35,12 @@ app.post('/file', function(req, res) {
         }
     }
     
-    if (!req.files || !req.files.file) {
-        res.send(400);
-    }
-    
-    // Parse uploaded file for errors.
-    fs.readFile(req.files.file.path, 'utf8', function(err, data) {
+    // Return any errors for the uploaded file.
+    fs.readFile(file.path, 'utf8', function(err, data) {
         if (!jshint(data, options)) {
             res.send(jshint.errors);
         } else {
-            res.send(200);
+            res.send(204);
         }          
     });   
 });

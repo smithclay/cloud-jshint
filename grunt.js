@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: '<json:package.json>',
     test: {
-      files: ['test/jspinch-test.js']
+      files: ['test/unit/*.js']
     },
     lint: {
       files: ['grunt.js', 'server.js', 'lib/**/*.js']
