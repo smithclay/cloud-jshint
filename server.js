@@ -4,7 +4,8 @@ var express = require('express'),
     format = util.format,
     path = require('path'),
     cgh = require('./lib/connect-hook'),
-    helpers = require('./lib/helpers');
+    helpers = require('./lib/helpers'),
+    webhook = require('./lib/webhook');
     
 var app = express.createServer();
 
@@ -19,7 +20,6 @@ app.post('/file', function(req, res) {
     if (!req.files || !req.files.file) {
         return res.send('No file specified in request\n', 400);
     }
-    
     // The file must be a javascript file.
     var file = req.files.file;    
     if ('.js' !== path.extname(file.name)) {
@@ -47,12 +47,13 @@ app.post('/file', function(req, res) {
     }); 
 });
 
-var webhookHandler = function(repo, payload) {
-    console.log('received push from:', repo);    
-};
-
-app.use(express.bodyParser());
-app.use(cgh({'/test': 'http://www.foo.com/'}, webhookHandler));
+// Configure where to upload files.
+app.use(express.bodyParser({keepExtensions: true, 
+    uploadDir: path.join(__dirname, "/public/uploads")}));
+// Limit requests to 1mb.
+app.use(express.limit('1mb'));
+// Configure github web hooks.
+app.use(cgh({'/test': 'http://www.foo.com/'}, webhook.handlePush));
 
 // Start listening.
 var port = process.env.PORT || 3000;
