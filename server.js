@@ -3,21 +3,21 @@ var express = require('express'),
     fs = require('fs'),
     format = util.format,
     path = require('path'),
-    cgh = require('./lib/connect-hook'),
     helpers = require('./lib/helpers'),
+    winston = require('winston');
     webhook = require('./lib/webhook');
     
 var app = express.createServer();
 
 app.get('/', function(req, res){
-    res.send('welcome to jspinch.');
+    res.send('welcome to jspinch');
 });
 
 app.post('/file', function(req, res) {
     var options = (req.body && req.body.options) || {};
-    
+
     // Request must have a posted file.
-    if (!req.files || !req.files.file) {
+    if (!req.files) {
         return res.send('No file specified in request\n', 400);
     }
     // The file must be a javascript file.
@@ -47,15 +47,12 @@ app.post('/file', function(req, res) {
     }); 
 });
 
-// Configure where to upload files.
-app.use(express.bodyParser({keepExtensions: true, 
-    uploadDir: path.join(__dirname, "/public/uploads")}));
-// Limit requests to 1mb.
-app.use(express.limit('1mb'));
-// Configure github web hooks.
-app.use(cgh({'/test': 'http://www.foo.com/'}, webhook.handlePush));
+app.configure(function() {
+    app.use(express.bodyParser());
+    app.use(webhook.createHook(webhook.handlePush));
+});
 
 // Start listening.
 var port = process.env.PORT || 3000;
-console.log(format('starting jspinch server on port %s.', port));
+winston.info(format('starting jspinch server on port %s.', port));
 app.listen(port);
